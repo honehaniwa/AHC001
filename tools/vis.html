@@ -1,0 +1,52 @@
+<html>
+	<body>
+		<fieldset>
+			出力ファイル数:
+			<input type="text" id='nums'><br>
+			遷移時間間隔:
+			<select id="time">
+				<option value="10">0.01sec</option>
+				<option value="100">0.1sec</option>
+				<option value="500">0.5sec</option>
+				<option value="1000">1sec</option>
+				<option value="2000">2sec</option>
+			</datalist>
+			<input type="button" id='button' value='スタート'><br>
+		</fieldset>
+		<div id='iteration'></div>
+		<img id='image' width="1000" height="1000" alt="" border="5" style='display:none'>
+	</body>
+	<script>
+		const num = document.getElementById('nums');
+		const button = document.getElementById('button');
+		const image = document.getElementById('image');
+		const time = document.getElementById('time');
+		const iteration = document.getElementById('iteration');
+
+		function sleep(ms) {
+			return new Promise(resolve => setTimeout(resolve, ms));
+		}
+
+		
+		const isNumber = function(value) {
+			return ((typeof value === 'number') && (isFinite(value)));
+		};
+
+		async function run() {
+			image.style.display = 'inline';
+			button.value = '動作中';
+			if(!isNumber(Number(num.value)) || num.value === '') {
+				image.src = `./out.svg`;
+				return;
+			}
+			for (let i = 0; i < Number(num.value); i++) {
+				image.src = `./out/out${i}.svg`;
+				await sleep(Number(time.value));
+				iteration.innerText = `iteration: ${i+1}`;
+			}
+			button.value = '再スタート';
+		}
+
+		button.addEventListener('click', run);
+	</script>
+</html>
