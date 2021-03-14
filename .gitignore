@@ -1,0 +1,9 @@
+./AHC001/outfiles/*
+./AHC001/trans_output/*
+./AHC001/in
+./AHC001/out
+./tools/in/*
+./tools/out/*
+./tools/example*
+./tools/testin
+./tools/testout
